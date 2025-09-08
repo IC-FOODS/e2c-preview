@@ -16,7 +16,6 @@ const INITIAL_FILES = [
     submittedAt: "2025-09-08",
     size: "2.4 MB",
     status: "pending",
-    anonymizationScore: 95,
     selected: false
   },
   {
@@ -26,7 +25,6 @@ const INITIAL_FILES = [
     submittedAt: "2025-08-31",
     size: "1.8 MB",
     status: "reviewed",
-    anonymizationScore: 87,
     selected: true
   },
   {
@@ -36,7 +34,6 @@ const INITIAL_FILES = [
     submittedAt: "2025-08-28",
     size: "4.2 MB",
     status: "certified",
-    anonymizationScore: 92,
     selected: false
   },
   {
@@ -46,7 +43,6 @@ const INITIAL_FILES = [
     submittedAt: "2025-08-25",
     size: "3.1 MB",
     status: "pending",
-    anonymizationScore: 89,
     selected: false
   }
 ];
@@ -83,14 +79,8 @@ const CertifierDashboard = () => {
         {status}
       </Badge>;
   };
-  const getScoreColor = (score: number) => {
-    if (score >= 90) return "text-success";
-    if (score >= 75) return "text-warning";
-    return "text-destructive";
-  };
   const totalFiles = submittedFiles.length;
   const certifiedFiles = submittedFiles.filter(f => f.status === "certified").length;
-  const avgScore = Math.round(submittedFiles.reduce((acc, f) => acc + f.anonymizationScore, 0) / totalFiles);
   return <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background p-6">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
@@ -132,18 +122,6 @@ const CertifierDashboard = () => {
                 <div>
                   <p className="text-2xl font-bold">{certifiedFiles}</p>
                   <p className="text-sm text-muted-foreground">Certified</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="shadow-card border-0">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <Shield className="h-8 w-8 text-accent" />
-                <div>
-                  <p className="text-2xl font-bold">{avgScore}%</p>
-                  <p className="text-sm text-muted-foreground">Avg Anonymization</p>
                 </div>
               </div>
             </CardContent>
@@ -192,11 +170,6 @@ const CertifierDashboard = () => {
                               
                               <div className="flex items-center gap-3">
                                 {getStatusBadge(file.status)}
-                                <div className="text-right">
-                                  <p className={`text-sm font-medium ${getScoreColor(file.anonymizationScore)}`}>
-                                    {file.anonymizationScore}% Anonymized
-                                  </p>
-                                </div>
                               </div>
                             </div>
                             
