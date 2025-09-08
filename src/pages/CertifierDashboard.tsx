@@ -97,7 +97,7 @@ const CertifierDashboard = () => {
             </Button>
           </div>
           <p className="text-muted-foreground">
-            Review submitted data and check against verification protocol
+            Review and select producers for certification
           </p>
         </div>
 
@@ -202,7 +202,7 @@ const CertifierDashboard = () => {
                         </p>
                       </div>
                       <Button className="bg-gradient-primary">
-                        Generate Report
+                        Qualify Producers
                       </Button>
                     </div>
                   </div>}
