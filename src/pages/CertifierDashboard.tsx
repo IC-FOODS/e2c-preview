@@ -83,14 +83,14 @@ const CertifierDashboard = () => {
               <div className="p-2 rounded-xl bg-accent/10">
                 <FileCheck className="h-6 w-6 text-accent" />
               </div>
-              <h1 className="text-3xl font-bold">Qualify Producers (for Certifiers)</h1>
+              <h1 className="text-3xl font-bold">Qualify Producers</h1>
             </div>
             <Button variant="outline" onClick={() => window.location.href = "/"} className="flex items-center gap-2">
               Log Out
             </Button>
           </div>
           <p className="text-muted-foreground">
-            Review submitted data and generate compliance reports
+            Review submitted data and check against verification protocol
           </p>
         </div>
 
