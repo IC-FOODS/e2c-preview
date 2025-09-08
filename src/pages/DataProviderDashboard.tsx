@@ -12,15 +12,15 @@ const DataProviderDashboard = () => {
   const [uploadedFiles, setUploadedFiles] = useState([
     {
       id: 1,
-      name: "customer_data.csv",
+      name: "Farm Data Sept 2024",
       size: "2.4 MB",
-      status: "anonymized",
-      anonymizedAt: "2024-01-15",
+      status: "pending",
+      anonymizedAt: null,
       submittedAt: null,
     },
     {
       id: 2,
-      name: "transaction_records.xlsx",
+      name: "Farm Data March 2025",
       size: "5.1 MB", 
       status: "pending",
       anonymizedAt: null,
@@ -28,11 +28,11 @@ const DataProviderDashboard = () => {
     },
     {
       id: 3,
-      name: "user_profiles.json",
+      name: "Farm Data Sept 2025",
       size: "1.8 MB",
-      status: "submitted",
+      status: "anonymized",
       anonymizedAt: "2024-01-14",
-      submittedAt: "2024-01-15",
+      submittedAt: null,
     },
   ]);
 
