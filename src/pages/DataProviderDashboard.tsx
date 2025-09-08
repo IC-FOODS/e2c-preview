@@ -7,35 +7,29 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Upload, FileText, Shield, Send, CheckCircle, Clock, AlertCircle } from "lucide-react";
 import { FileUploadZone } from "@/components/FileUploadZone";
 import { AnonymizationTools } from "@/components/AnonymizationTools";
-
 const DataProviderDashboard = () => {
-  const [uploadedFiles, setUploadedFiles] = useState([
-    {
-      id: 1,
-      name: "Farm Data Sept 2024",
-      size: "2.4 MB",
-      status: "submitted",
-      anonymizedAt: "2024-01-13",
-      submittedAt: "2024-01-14",
-    },
-    {
-      id: 2,
-      name: "Farm Data March 2025",
-      size: "5.1 MB", 
-      status: "submitted",
-      anonymizedAt: "2024-01-12",
-      submittedAt: "2024-01-13",
-    },
-    {
-      id: 3,
-      name: "Farm Data Sept 2025",
-      size: "1.8 MB",
-      status: "anonymized",
-      anonymizedAt: null,
-      submittedAt: null,
-    },
-  ]);
-
+  const [uploadedFiles, setUploadedFiles] = useState([{
+    id: 1,
+    name: "Farm Data Sept 2024",
+    size: "2.4 MB",
+    status: "submitted",
+    anonymizedAt: "2024-01-13",
+    submittedAt: "2024-01-14"
+  }, {
+    id: 2,
+    name: "Farm Data March 2025",
+    size: "5.1 MB",
+    status: "submitted",
+    anonymizedAt: "2024-01-12",
+    submittedAt: "2024-01-13"
+  }, {
+    id: 3,
+    name: "Farm Data Sept 2025",
+    size: "1.8 MB",
+    status: "anonymized",
+    anonymizedAt: null,
+    submittedAt: null
+  }]);
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "anonymized":
@@ -48,22 +42,19 @@ const DataProviderDashboard = () => {
         return <AlertCircle className="h-4 w-4 text-muted-foreground" />;
     }
   };
-
   const getStatusBadge = (status: string) => {
-    const variants: { [key: string]: "default" | "secondary" | "destructive" | "outline" } = {
+    const variants: {
+      [key: string]: "default" | "secondary" | "destructive" | "outline";
+    } = {
       anonymized: "default",
-      pending: "secondary", 
-      submitted: "outline",
+      pending: "secondary",
+      submitted: "outline"
     };
-    return (
-      <Badge variant={variants[status] || "secondary"} className="capitalize">
+    return <Badge variant={variants[status] || "secondary"} className="capitalize">
         {status}
-      </Badge>
-    );
+      </Badge>;
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background p-6">
+  return <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background p-6">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-8">
@@ -74,11 +65,7 @@ const DataProviderDashboard = () => {
               </div>
               <h1 className="text-3xl font-bold">Data Provider Dashboard</h1>
             </div>
-            <Button 
-              variant="outline" 
-              onClick={() => window.location.href = "/"}
-              className="flex items-center gap-2"
-            >
+            <Button variant="outline" onClick={() => window.location.href = "/"} className="flex items-center gap-2">
               Log Out
             </Button>
           </div>
@@ -118,7 +105,7 @@ const DataProviderDashboard = () => {
               <div className="flex items-center gap-3">
                 <Send className="h-8 w-8 text-accent" />
                 <div>
-                  <p className="text-2xl font-bold">1</p>
+                  <p className="text-2xl font-bold">2</p>
                   <p className="text-sm text-muted-foreground">Submitted</p>
                 </div>
               </div>
@@ -193,8 +180,7 @@ const DataProviderDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {uploadedFiles.map((file) => (
-                    <Card key={file.id} className="border shadow-sm">
+                  {uploadedFiles.map(file => <Card key={file.id} className="border shadow-sm">
                       <CardContent className="p-4">
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
@@ -207,38 +193,29 @@ const DataProviderDashboard = () => {
                           
                           <div className="flex items-center gap-3">
                             {getStatusBadge(file.status)}
-                            {file.status === "anonymized" && (
-                              <Button size="sm" className="bg-gradient-primary">
+                            {file.status === "anonymized" && <Button size="sm" className="bg-gradient-primary">
                                 Submit to Certifier
-                              </Button>
-                            )}
-                            {file.status === "pending" && (
-                              <Button size="sm" variant="outline">
+                              </Button>}
+                            {file.status === "pending" && <Button size="sm" variant="outline">
                                 Anonymize
-                              </Button>
-                            )}
+                              </Button>}
                           </div>
                         </div>
                         
-                        {file.anonymizedAt && (
-                          <div className="mt-3 pt-3 border-t">
+                        {file.anonymizedAt && <div className="mt-3 pt-3 border-t">
                             <p className="text-xs text-muted-foreground">
                               Anonymized on {file.anonymizedAt}
                               {file.submittedAt && ` • Submitted on ${file.submittedAt}`}
                             </p>
-                          </div>
-                        )}
+                          </div>}
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default DataProviderDashboard;
