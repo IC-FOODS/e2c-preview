@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FileText, Download, CheckCircle, Clock, FileCheck, BarChart3, Shield } from "lucide-react";
+import { FileText, CheckCircle, Clock, FileCheck, BarChart3, Shield } from "lucide-react";
 import { ReportGenerator } from "@/components/ReportGenerator";
 
 // Initial file data stored outside component to prevent reversion on hot reloads
@@ -177,10 +177,6 @@ const CertifierDashboard = () => {
                             <div className="flex items-center justify-between text-xs text-muted-foreground">
                               <span>Submitted on {file.submittedAt}</span>
                               <div className="flex gap-2">
-                                <Button size="sm" variant="outline">
-                                  <Download className="h-3 w-3 mr-1" />
-                                  Download
-                                </Button>
                                 {file.status === "pending" && <Button size="sm" className="bg-gradient-primary">
                                     Review
                                   </Button>}
