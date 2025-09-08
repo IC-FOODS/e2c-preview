@@ -6,35 +6,52 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FileText, Download, CheckCircle, Clock, FileCheck, BarChart3, Shield } from "lucide-react";
 import { ReportGenerator } from "@/components/ReportGenerator";
-const CertifierDashboard = () => {
-  const [submittedFiles, setSubmittedFiles] = useState([{
+
+// Initial file data stored outside component to prevent reversion on hot reloads
+const INITIAL_FILES = [
+  {
     id: 1,
-    name: "customer_data.csv",
+    name: "a1b2c3d4e5f6.csv",
     provider: "DataCorp Inc.",
-    submittedAt: "2024-01-15",
+    submittedAt: "2025-09-08",
     size: "2.4 MB",
     status: "pending",
     anonymizationScore: 95,
     selected: false
-  }, {
+  },
+  {
     id: 2,
-    name: "user_profiles.json",
+    name: "789abcdef012.json",
     provider: "TechStart LLC",
-    submittedAt: "2024-01-14",
+    submittedAt: "2025-08-31",
     size: "1.8 MB",
     status: "reviewed",
     anonymizationScore: 87,
     selected: true
-  }, {
+  },
+  {
     id: 3,
-    name: "financial_records.xlsx",
+    name: "345678abcdef.xlsx",
     provider: "FinanceHub",
-    submittedAt: "2024-01-13",
+    submittedAt: "2025-08-28",
     size: "4.2 MB",
     status: "certified",
     anonymizationScore: 92,
     selected: false
-  }]);
+  },
+  {
+    id: 4,
+    name: "fedcba987654.xml",
+    provider: "SecureData Ltd.",
+    submittedAt: "2025-08-25",
+    size: "3.1 MB",
+    status: "pending",
+    anonymizationScore: 89,
+    selected: false
+  }
+];
+const CertifierDashboard = () => {
+  const [submittedFiles, setSubmittedFiles] = useState(INITIAL_FILES);
   const [selectedFiles, setSelectedFiles] = useState<number[]>([2]);
   const handleFileSelection = (fileId: number, checked: boolean) => {
     if (checked) {
