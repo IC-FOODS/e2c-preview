@@ -86,11 +86,20 @@ const CertifierDashboard = () => {
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 rounded-xl bg-accent/10">
-              <FileCheck className="h-6 w-6 text-accent" />
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-xl bg-accent/10">
+                <FileCheck className="h-6 w-6 text-accent" />
+              </div>
+              <h1 className="text-3xl font-bold">Certifier Dashboard</h1>
             </div>
-            <h1 className="text-3xl font-bold">Certifier Dashboard</h1>
+            <Button 
+              variant="outline" 
+              onClick={() => window.location.href = "/"}
+              className="flex items-center gap-2"
+            >
+              Log Out
+            </Button>
           </div>
           <p className="text-muted-foreground">
             Review submitted data and generate compliance reports
