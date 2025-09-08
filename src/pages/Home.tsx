@@ -1,16 +1,13 @@
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Shield, Upload, FileCheck, Users, Database, Lock } from "lucide-react";
 
 const Home = () => {
-  const navigate = useNavigate();
-
   const handleRoleSelect = (role: "provider" | "certifier") => {
     if (role === "provider") {
-      navigate("/provider");
+      window.location.href = "/provider";
     } else {
-      navigate("/certifier");
+      window.location.href = "/certifier";
     }
   };
 
