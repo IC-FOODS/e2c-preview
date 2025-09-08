@@ -6,93 +6,75 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FileText, Download, CheckCircle, Clock, FileCheck, BarChart3, Shield } from "lucide-react";
 import { ReportGenerator } from "@/components/ReportGenerator";
-
 const CertifierDashboard = () => {
-  const [submittedFiles, setSubmittedFiles] = useState([
-    {
-      id: 1,
-      name: "a1b2c3d4e5f6.csv",
-      provider: "AgriTech Solutions",
-      submittedAt: "2025-09-08",
-      size: "3.1 MB", 
-      status: "pending",
-      anonymizationScore: 94,
-      selected: false,
-    },
-    {
-      id: 2,
-      name: "789abc012def.json",
-      provider: "FarmData Inc.",
-      submittedAt: "2025-08-28",
-      size: "2.7 MB",
-      status: "reviewed",
-      anonymizationScore: 89,
-      selected: false,
-    },
-    {
-      id: 3,
-      name: "fedcba987654.xlsx",
-      provider: "CropAnalytics Ltd",
-      submittedAt: "2025-08-15",
-      size: "4.5 MB",
-      status: "certified",
-      anonymizationScore: 91,
-      selected: false,
-    },
-    {
-      id: 4,
-      name: "123456789abc.csv",
-      provider: "DataHarvest Corp",
-      submittedAt: "2025-08-03",
-      size: "1.9 MB",
-      status: "pending",
-      anonymizationScore: 88,
-      selected: false,
-    },
-  ]);
-
-  const [selectedFiles, setSelectedFiles] = useState<number[]>([]);
-
+  const [submittedFiles, setSubmittedFiles] = useState([{
+    id: 1,
+    name: "customer_data.csv",
+    provider: "DataCorp Inc.",
+    submittedAt: "2024-01-15",
+    size: "2.4 MB",
+    status: "pending",
+    anonymizationScore: 95,
+    selected: false
+  }, {
+    id: 2,
+    name: "user_profiles.json",
+    provider: "TechStart LLC",
+    submittedAt: "2024-01-14",
+    size: "1.8 MB",
+    status: "reviewed",
+    anonymizationScore: 87,
+    selected: true
+  }, {
+    id: 3,
+    name: "financial_records.xlsx",
+    provider: "FinanceHub",
+    submittedAt: "2024-01-13",
+    size: "4.2 MB",
+    status: "certified",
+    anonymizationScore: 92,
+    selected: false
+  }]);
+  const [selectedFiles, setSelectedFiles] = useState<number[]>([2]);
   const handleFileSelection = (fileId: number, checked: boolean) => {
     if (checked) {
       setSelectedFiles(prev => [...prev, fileId]);
     } else {
       setSelectedFiles(prev => prev.filter(id => id !== fileId));
     }
-    
-    setSubmittedFiles(prev => 
-      prev.map(file => 
-        file.id === fileId ? { ...file, selected: checked } : file
-      )
-    );
+    setSubmittedFiles(prev => prev.map(file => file.id === fileId ? {
+      ...file,
+      selected: checked
+    } : file));
   };
-
   const getStatusBadge = (status: string) => {
     const config = {
-      pending: { variant: "secondary" as const, color: "text-warning" },
-      reviewed: { variant: "default" as const, color: "text-primary" },
-      certified: { variant: "outline" as const, color: "text-success" },
+      pending: {
+        variant: "secondary" as const,
+        color: "text-warning"
+      },
+      reviewed: {
+        variant: "default" as const,
+        color: "text-primary"
+      },
+      certified: {
+        variant: "outline" as const,
+        color: "text-success"
+      }
     };
-    
-    return (
-      <Badge variant={config[status]?.variant || "secondary"} className="capitalize">
+    return <Badge variant={config[status]?.variant || "secondary"} className="capitalize">
         {status}
-      </Badge>
-    );
+      </Badge>;
   };
-
   const getScoreColor = (score: number) => {
     if (score >= 90) return "text-success";
     if (score >= 75) return "text-warning";
     return "text-destructive";
   };
-
   const totalFiles = submittedFiles.length;
   const certifiedFiles = submittedFiles.filter(f => f.status === "certified").length;
   const avgScore = Math.round(submittedFiles.reduce((acc, f) => acc + f.anonymizationScore, 0) / totalFiles);
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background p-6">
+  return <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background p-6">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className="mb-8">
@@ -103,11 +85,7 @@ const CertifierDashboard = () => {
               </div>
               <h1 className="text-3xl font-bold">Certifier Dashboard</h1>
             </div>
-            <Button 
-              variant="outline" 
-              onClick={() => window.location.href = "/"}
-              className="flex items-center gap-2"
-            >
+            <Button variant="outline" onClick={() => window.location.href = "/"} className="flex items-center gap-2">
               Log Out
             </Button>
           </div>
@@ -154,17 +132,7 @@ const CertifierDashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="shadow-card border-0">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <BarChart3 className="h-8 w-8 text-warning" />
-                <div>
-                  <p className="text-2xl font-bold">{selectedFiles.length}</p>
-                  <p className="text-sm text-muted-foreground">Selected for Report</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          
         </div>
 
         {/* Main Content */}
@@ -188,16 +156,10 @@ const CertifierDashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {submittedFiles.map((file) => (
-                    <Card key={file.id} className="border shadow-sm">
+                  {submittedFiles.map(file => <Card key={file.id} className="border shadow-sm">
                       <CardContent className="p-4">
                         <div className="flex items-center gap-4">
-                          <Checkbox
-                            checked={file.selected}
-                            onCheckedChange={(checked) => 
-                              handleFileSelection(file.id, checked as boolean)
-                            }
-                          />
+                          <Checkbox checked={file.selected} onCheckedChange={checked => handleFileSelection(file.id, checked as boolean)} />
                           
                           <div className="flex-1">
                             <div className="flex items-center justify-between mb-2">
@@ -211,28 +173,35 @@ const CertifierDashboard = () => {
                                 </div>
                               </div>
                               
+                              <div className="flex items-center gap-3">
+                                {getStatusBadge(file.status)}
+                                <div className="text-right">
+                                  <p className={`text-sm font-medium ${getScoreColor(file.anonymizationScore)}`}>
+                                    {file.anonymizationScore}% Anonymized
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                             
                             <div className="flex items-center justify-between text-xs text-muted-foreground">
                               <span>Submitted on {file.submittedAt}</span>
-                              <div className="flex gap-2 items-center">
-                                {getStatusBadge(file.status)}
-                                {file.status === "pending" && (
-                                  <Button size="sm" className="bg-gradient-primary">
+                              <div className="flex gap-2">
+                                <Button size="sm" variant="outline">
+                                  <Download className="h-3 w-3 mr-1" />
+                                  Download
+                                </Button>
+                                {file.status === "pending" && <Button size="sm" className="bg-gradient-primary">
                                     Review
-                                  </Button>
-                                )}
+                                  </Button>}
                               </div>
                             </div>
                           </div>
                         </div>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
                 
-                {selectedFiles.length > 0 && (
-                  <div className="mt-6 p-4 bg-primary/10 border border-primary/20 rounded-lg">
+                {selectedFiles.length > 0 && <div className="mt-6 p-4 bg-primary/10 border border-primary/20 rounded-lg">
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-medium text-primary">
@@ -246,8 +215,7 @@ const CertifierDashboard = () => {
                         Generate Report
                       </Button>
                     </div>
-                  </div>
-                )}
+                  </div>}
               </CardContent>
             </Card>
           </TabsContent>
@@ -293,8 +261,6 @@ const CertifierDashboard = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default CertifierDashboard;
