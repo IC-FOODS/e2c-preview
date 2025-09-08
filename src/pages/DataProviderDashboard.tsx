@@ -130,7 +130,7 @@ const DataProviderDashboard = () => {
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="upload">Upload Files</TabsTrigger>
             <TabsTrigger value="anonymize">Anonymize Data</TabsTrigger>
-            <TabsTrigger value="manage">Manage Files</TabsTrigger>
+            <TabsTrigger value="manage">Submit Files</TabsTrigger>
           </TabsList>
 
           <TabsContent value="upload" className="space-y-6">
