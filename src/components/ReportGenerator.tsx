@@ -229,7 +229,7 @@ export const ReportGenerator = ({ selectedFiles }: ReportGeneratorProps) => {
                           "destructive"
                         }
                         className={
-                          row.status === "Compliant" ? "border-green-500 text-green-700 bg-green-50" : 
+                          row.status === "Compliant" ? "bg-green-600 text-white border-green-600" : 
                           row.status === "Needs Review" ? "border-yellow-500 text-yellow-700 bg-yellow-50" : 
                           ""
                         }
