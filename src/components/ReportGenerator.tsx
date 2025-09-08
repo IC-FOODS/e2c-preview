@@ -8,6 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge"; 
 import { FileText, Download, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "sonner";
 
 interface ReportGeneratorProps {
@@ -16,11 +18,25 @@ interface ReportGeneratorProps {
 
 export const ReportGenerator = ({ selectedFiles }: ReportGeneratorProps) => {
   const [reportConfig, setReportConfig] = useState({
-    title: "Data Anonymization Compliance Report",
+    title: "Findings Preview",
     template: "standard",
     includeCharts: true,
     includeDetails: true,
   });
+
+  // Sample tabular data for preview
+  const sampleData = [
+    { id: 1, fileName: "a1b2c3d4e5f6.csv", status: "Compliant", score: 94, issues: 2 },
+    { id: 2, fileName: "789abcdef012.json", status: "Compliant", score: 91, issues: 3 },
+    { id: 3, fileName: "345678abcdef.xlsx", status: "Needs Review", score: 78, issues: 7 },
+    { id: 4, fileName: "fedcba987654.xml", status: "Compliant", score: 88, issues: 4 },
+    { id: 5, fileName: "123abc456def.csv", status: "Non-Compliant", score: 65, issues: 12 },
+    { id: 6, fileName: "987fed321cba.json", status: "Compliant", score: 96, issues: 1 },
+    { id: 7, fileName: "456def789abc.xlsx", status: "Needs Review", score: 82, issues: 6 },
+    { id: 8, fileName: "cba321fed987.xml", status: "Compliant", score: 93, issues: 2 },
+    { id: 9, fileName: "def456abc123.csv", status: "Compliant", score: 89, issues: 4 },
+    { id: 10, fileName: "fed987cba654.json", status: "Needs Review", score: 76, issues: 8 }
+  ];
   
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationProgress, setGenerationProgress] = useState(0);
@@ -180,6 +196,52 @@ export const ReportGenerator = ({ selectedFiles }: ReportGeneratorProps) => {
               className="min-h-[80px]"
             />
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Findings Preview */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle>Findings Preview</CardTitle>
+          <CardDescription>Sample compliance analysis results</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ScrollArea className="h-96 w-full border rounded-md">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>File Name</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Compliance Score</TableHead>
+                  <TableHead>Issues Found</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {sampleData.map((row) => (
+                  <TableRow key={row.id}>
+                    <TableCell className="font-medium">{row.fileName}</TableCell>
+                    <TableCell>
+                      <Badge 
+                        variant={
+                          row.status === "Compliant" ? "default" : 
+                          row.status === "Needs Review" ? "secondary" : 
+                          "destructive"
+                        }
+                      >
+                        {row.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>{row.score}%</TableCell>
+                    <TableCell>{row.issues}</TableCell>
+                    <TableCell>
+                      <Button size="sm" variant="outline">View Details</Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </ScrollArea>
         </CardContent>
       </Card>
 

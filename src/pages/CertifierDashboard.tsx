@@ -134,7 +134,7 @@ const CertifierDashboard = () => {
         <Tabs defaultValue="review" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="review">Review Files</TabsTrigger>
-            <TabsTrigger value="generate">Generate Report</TabsTrigger>
+            <TabsTrigger value="generate">Findings Summary</TabsTrigger>
             <TabsTrigger value="history">Report History</TabsTrigger>
           </TabsList>
 
