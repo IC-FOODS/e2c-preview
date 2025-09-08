@@ -82,7 +82,6 @@ const CertifierDashboard = () => {
   };
   const totalFiles = submittedFiles.length;
   const certifiedFiles = submittedFiles.filter(f => f.status === "certified").length;
-  const avgScore = Math.round(submittedFiles.reduce((acc, f) => acc + f.anonymizationScore, 0) / totalFiles);
   return <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background p-6">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
@@ -104,7 +103,7 @@ const CertifierDashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
           <Card className="shadow-card border-0">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
@@ -128,20 +127,6 @@ const CertifierDashboard = () => {
               </div>
             </CardContent>
           </Card>
-
-          <Card className="shadow-card border-0">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-3">
-                <Shield className="h-8 w-8 text-accent" />
-                <div>
-                  <p className="text-2xl font-bold">{avgScore}%</p>
-                  <p className="text-sm text-muted-foreground">Avg Anonymization</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          
         </div>
 
         {/* Main Content */}
