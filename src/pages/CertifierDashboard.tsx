@@ -9,42 +9,33 @@ import { ReportGenerator } from "@/components/ReportGenerator";
 const CertifierDashboard = () => {
   const [submittedFiles, setSubmittedFiles] = useState([{
     id: 1,
-    name: "a1b2c3d4e5f6.csv",
+    name: "customer_data.csv",
     provider: "DataCorp Inc.",
-    submittedAt: "9/8/25",
+    submittedAt: "2024-01-15",
     size: "2.4 MB",
     status: "pending",
     anonymizationScore: 95,
     selected: false
   }, {
     id: 2,
-    name: "7f8e9d0c1b2a.json",
+    name: "user_profiles.json",
     provider: "TechStart LLC",
-    submittedAt: "8/28/25",
+    submittedAt: "2024-01-14",
     size: "1.8 MB",
     status: "reviewed",
     anonymizationScore: 87,
-    selected: false
+    selected: true
   }, {
     id: 3,
-    name: "3c4d5e6f7a8b.xlsx",
+    name: "financial_records.xlsx",
     provider: "FinanceHub",
-    submittedAt: "8/15/25",
+    submittedAt: "2024-01-13",
     size: "4.2 MB",
     status: "certified",
     anonymizationScore: 92,
     selected: false
-  }, {
-    id: 4,
-    name: "9e0f1a2b3c4d.pdf",
-    provider: "SecureData Corp",
-    submittedAt: "8/3/25",
-    size: "3.1 MB",
-    status: "pending",
-    anonymizationScore: 88,
-    selected: false
   }]);
-  const [selectedFiles, setSelectedFiles] = useState<number[]>([]);
+  const [selectedFiles, setSelectedFiles] = useState<number[]>([2]);
   const handleFileSelection = (fileId: number, checked: boolean) => {
     if (checked) {
       setSelectedFiles(prev => [...prev, fileId]);
@@ -82,6 +73,7 @@ const CertifierDashboard = () => {
   };
   const totalFiles = submittedFiles.length;
   const certifiedFiles = submittedFiles.filter(f => f.status === "certified").length;
+  const avgScore = Math.round(submittedFiles.reduce((acc, f) => acc + f.anonymizationScore, 0) / totalFiles);
   return <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background p-6">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
@@ -91,7 +83,7 @@ const CertifierDashboard = () => {
               <div className="p-2 rounded-xl bg-accent/10">
                 <FileCheck className="h-6 w-6 text-accent" />
               </div>
-              <h1 className="text-3xl font-bold">Certifier Dashboard</h1>
+              <h1 className="text-3xl font-bold">Qualify Producers (for Certifiers)</h1>
             </div>
             <Button variant="outline" onClick={() => window.location.href = "/"} className="flex items-center gap-2">
               Log Out
@@ -103,7 +95,7 @@ const CertifierDashboard = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid md:grid-cols-4 gap-6 mb-8">
           <Card className="shadow-card border-0">
             <CardContent className="p-6">
               <div className="flex items-center gap-3">
@@ -127,6 +119,20 @@ const CertifierDashboard = () => {
               </div>
             </CardContent>
           </Card>
+
+          <Card className="shadow-card border-0">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-3">
+                <Shield className="h-8 w-8 text-accent" />
+                <div>
+                  <p className="text-2xl font-bold">{avgScore}%</p>
+                  <p className="text-sm text-muted-foreground">Avg Anonymization</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          
         </div>
 
         {/* Main Content */}
@@ -168,21 +174,25 @@ const CertifierDashboard = () => {
                               </div>
                               
                               <div className="flex items-center gap-3">
-                                
+                                {getStatusBadge(file.status)}
+                                <div className="text-right">
+                                  <p className={`text-sm font-medium ${getScoreColor(file.anonymizationScore)}`}>
+                                    {file.anonymizationScore}% Anonymized
+                                  </p>
+                                </div>
                               </div>
                             </div>
                             
                             <div className="flex items-center justify-between text-xs text-muted-foreground">
                               <span>Submitted on {file.submittedAt}</span>
                               <div className="flex gap-2">
-                                {file.status === "pending" && (
-                                  <>
-                                    {getStatusBadge(file.status)}
-                                    <Button size="sm" className="bg-gradient-primary">
-                                      Review
-                                    </Button>
-                                  </>
-                                )}
+                                <Button size="sm" variant="outline">
+                                  <Download className="h-3 w-3 mr-1" />
+                                  Download
+                                </Button>
+                                {file.status === "pending" && <Button size="sm" className="bg-gradient-primary">
+                                    Review
+                                  </Button>}
                               </div>
                             </div>
                           </div>
