@@ -27,7 +27,7 @@ const CertifierDashboard = () => {
       size: "2.7 MB",
       status: "reviewed",
       anonymizationScore: 89,
-      selected: true,
+      selected: false,
     },
     {
       id: 3,
@@ -51,7 +51,7 @@ const CertifierDashboard = () => {
     },
   ]);
 
-  const [selectedFiles, setSelectedFiles] = useState<number[]>([2]);
+  const [selectedFiles, setSelectedFiles] = useState<number[]>([]);
 
   const handleFileSelection = (fileId: number, checked: boolean) => {
     if (checked) {
@@ -213,21 +213,12 @@ const CertifierDashboard = () => {
                               
                               <div className="flex items-center gap-3">
                                 {getStatusBadge(file.status)}
-                                <div className="text-right">
-                                  <p className={`text-sm font-medium ${getScoreColor(file.anonymizationScore)}`}>
-                                    {file.anonymizationScore}% Anonymized
-                                  </p>
-                                </div>
                               </div>
                             </div>
                             
                             <div className="flex items-center justify-between text-xs text-muted-foreground">
                               <span>Submitted on {file.submittedAt}</span>
                               <div className="flex gap-2">
-                                <Button size="sm" variant="outline">
-                                  <Download className="h-3 w-3 mr-1" />
-                                  Download
-                                </Button>
                                 {file.status === "pending" && (
                                   <Button size="sm" className="bg-gradient-primary">
                                     Review
