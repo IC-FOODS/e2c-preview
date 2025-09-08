@@ -93,7 +93,7 @@ const DataProviderDashboard = () => {
               <div className="flex items-center gap-3">
                 <Shield className="h-8 w-8 text-success" />
                 <div>
-                  <p className="text-2xl font-bold">2</p>
+                  <p className="text-2xl font-bold">3</p>
                   <p className="text-sm text-muted-foreground">Anonymized</p>
                 </div>
               </div>
