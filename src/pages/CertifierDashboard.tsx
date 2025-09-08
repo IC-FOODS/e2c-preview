@@ -49,6 +49,7 @@ const INITIAL_FILES = [
 const CertifierDashboard = () => {
   const [submittedFiles, setSubmittedFiles] = useState(INITIAL_FILES);
   const [selectedFiles, setSelectedFiles] = useState<number[]>([2]);
+  const [activeTab, setActiveTab] = useState("review");
   const handleFileSelection = (fileId: number, checked: boolean) => {
     if (checked) {
       setSelectedFiles(prev => [...prev, fileId]);
@@ -131,7 +132,7 @@ const CertifierDashboard = () => {
         </div>
 
         {/* Main Content */}
-        <Tabs defaultValue="review" className="space-y-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="review">Review Files</TabsTrigger>
             <TabsTrigger value="generate">Findings Summary</TabsTrigger>
@@ -195,13 +196,16 @@ const CertifierDashboard = () => {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-medium text-primary">
-                          {selectedFiles.length} file(s) selected for report generation
+                          {selectedFiles.length} file(s) selected for qualification
                         </p>
                         <p className="text-sm text-primary/80">
-                          Ready to generate compliance report
+                          Ready to qualify producers
                         </p>
                       </div>
-                      <Button className="bg-gradient-primary">
+                      <Button 
+                        className="bg-gradient-primary"
+                        onClick={() => setActiveTab("generate")}
+                      >
                         Qualify Producers
                       </Button>
                     </div>
