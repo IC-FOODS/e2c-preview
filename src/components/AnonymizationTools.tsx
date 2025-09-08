@@ -10,7 +10,7 @@ import { Eye, EyeOff, Shield, Wand2, Save } from "lucide-react";
 import { toast } from "sonner";
 
 export const AnonymizationTools = () => {
-  const [selectedFile, setSelectedFile] = useState("customer_data.csv");
+  const [selectedFile, setSelectedFile] = useState("Farm Data Sept 2025");
   const [previewMode, setPreviewMode] = useState<"original" | "anonymized">("original");
   const [anonymizationRules, setAnonymizationRules] = useState([
     { field: "email", method: "mask", pattern: "***@***.com" },
@@ -48,7 +48,7 @@ Bob J***,***@***.com,XXX-XXX-XXXX,ENCRYPTED_ID,789 **** Rd`,
         </CardHeader>
         <CardContent>
           <div className="grid gap-3">
-            {["customer_data.csv", "transaction_records.xlsx", "user_profiles.json"].map((file) => (
+            {["Farm Data Sept 2024", "Farm Data March 2025", "Farm Data Sept 2025"].map((file) => (
               <div
                 key={file}
                 className={`p-3 rounded-lg border cursor-pointer transition-all ${
