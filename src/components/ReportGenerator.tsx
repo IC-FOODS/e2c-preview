@@ -224,9 +224,14 @@ export const ReportGenerator = ({ selectedFiles }: ReportGeneratorProps) => {
                     <TableCell>
                       <Badge 
                         variant={
-                          row.status === "Compliant" ? "default" : 
+                          row.status === "Compliant" ? "outline" : 
                           row.status === "Needs Review" ? "secondary" : 
                           "destructive"
+                        }
+                        className={
+                          row.status === "Compliant" ? "border-green-500 text-green-700 bg-green-50" : 
+                          row.status === "Needs Review" ? "border-yellow-500 text-yellow-700 bg-yellow-50" : 
+                          ""
                         }
                       >
                         {row.status}
