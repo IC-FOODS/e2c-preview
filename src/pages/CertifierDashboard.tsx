@@ -211,14 +211,12 @@ const CertifierDashboard = () => {
                                 </div>
                               </div>
                               
-                              <div className="flex items-center gap-3">
-                                {getStatusBadge(file.status)}
-                              </div>
                             </div>
                             
                             <div className="flex items-center justify-between text-xs text-muted-foreground">
                               <span>Submitted on {file.submittedAt}</span>
-                              <div className="flex gap-2">
+                              <div className="flex gap-2 items-center">
+                                {getStatusBadge(file.status)}
                                 {file.status === "pending" && (
                                   <Button size="sm" className="bg-gradient-primary">
                                     Review
