@@ -304,7 +304,7 @@ export const ReportGenerator = ({ selectedFiles }: ReportGeneratorProps) => {
             className="bg-gradient-primary px-8 py-3 text-lg"
           >
             <FileText className="h-5 w-5 mr-2" />
-            Generate Compliance Report
+            Generate Summary Report
           </Button>
         </div>
       )}
