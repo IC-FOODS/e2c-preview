@@ -63,7 +63,7 @@ const DataProviderDashboard = () => {
               <div className="p-2 rounded-xl bg-primary/10">
                 <Shield className="h-6 w-6 text-primary" />
               </div>
-              <h1 className="text-3xl font-bold">Data Provider Dashboard</h1>
+              <h1 className="text-3xl font-bold">For Data Providers</h1>
             </div>
             <Button variant="outline" onClick={() => window.location.href = "/"} className="flex items-center gap-2">
               Log Out
