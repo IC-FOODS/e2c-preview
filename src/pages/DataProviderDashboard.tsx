@@ -7,7 +7,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Upload, FileText, Shield, Send, CheckCircle, Clock, AlertCircle } from "lucide-react";
 import { FileUploadZone } from "@/components/FileUploadZone";
 import { AnonymizationTools } from "@/components/AnonymizationTools";
+import { useToast } from "@/hooks/use-toast";
 const DataProviderDashboard = () => {
+  const { toast } = useToast();
   const [uploadedFiles, setUploadedFiles] = useState([{
     id: 1,
     name: "Farm Data Sept 2024",
@@ -27,9 +29,36 @@ const DataProviderDashboard = () => {
     name: "Farm Data Sept 2025",
     size: "1.8 MB",
     status: "anonymized",
-    anonymizedAt: null,
+    anonymizedAt: "2024-01-10",
     submittedAt: null
   }]);
+
+  const handleSubmitToCertifier = async (fileId: number) => {
+    // Show sending message
+    toast({
+      title: "Sending file(s)...",
+      description: "Your file is being submitted to the certifier.",
+    });
+
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    // Update file status to submitted
+    const timestamp = new Date().toLocaleString();
+    setUploadedFiles(prevFiles => 
+      prevFiles.map(file => 
+        file.id === fileId 
+          ? { ...file, status: "submitted", submittedAt: timestamp }
+          : file
+      )
+    );
+
+    // Show success message
+    toast({
+      title: "Received successfully",
+      description: `File received at ${timestamp}`,
+    });
+  };
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "anonymized":
@@ -193,7 +222,11 @@ const DataProviderDashboard = () => {
                           
                           <div className="flex items-center gap-3">
                             {getStatusBadge(file.status)}
-                            {file.status === "anonymized" && <Button size="sm" className="bg-gradient-primary">
+                            {file.status === "anonymized" && <Button 
+                                size="sm" 
+                                className="bg-gradient-primary"
+                                onClick={() => handleSubmitToCertifier(file.id)}
+                              >
                                 Submit to Certifier
                               </Button>}
                             {file.status === "pending" && <Button size="sm" variant="outline">
