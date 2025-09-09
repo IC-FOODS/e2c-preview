@@ -26,16 +26,16 @@ export const ReportGenerator = ({ selectedFiles }: ReportGeneratorProps) => {
 
   // Sample tabular data for preview
   const sampleData = [
-    { id: 1, fileName: "a1b2c3d4e5f6.csv", status: "Compliant", score: 94, issues: 2 },
-    { id: 2, fileName: "789abcdef012.json", status: "Compliant", score: 91, issues: 3 },
-    { id: 3, fileName: "345678abcdef.xlsx", status: "Needs Review", score: 78, issues: 7 },
-    { id: 4, fileName: "fedcba987654.xml", status: "Compliant", score: 88, issues: 4 },
-    { id: 5, fileName: "123abc456def.csv", status: "Non-Compliant", score: 65, issues: 12 },
-    { id: 6, fileName: "987fed321cba.json", status: "Compliant", score: 96, issues: 1 },
-    { id: 7, fileName: "456def789abc.xlsx", status: "Needs Review", score: 82, issues: 6 },
-    { id: 8, fileName: "cba321fed987.xml", status: "Compliant", score: 93, issues: 2 },
-    { id: 9, fileName: "def456abc123.csv", status: "Compliant", score: 89, issues: 4 },
-    { id: 10, fileName: "fed987cba654.json", status: "Needs Review", score: 76, issues: 8 }
+    { id: 1, fileName: "a1b2c3d4e5f6", status: "Qualifies", score: 94, issues: 2 },
+    { id: 2, fileName: "789abcdef012", status: "Qualifies", score: 91, issues: 3 },
+    { id: 3, fileName: "345678abcdef", status: "Needs Review", score: 78, issues: 7 },
+    { id: 4, fileName: "fedcba987654", status: "Qualifies", score: 88, issues: 4 },
+    { id: 5, fileName: "123abc456def", status: "Disqualified", score: 65, issues: 12 },
+    { id: 6, fileName: "987fed321cba", status: "Qualifies", score: 96, issues: 1 },
+    { id: 7, fileName: "456def789abc", status: "Needs Review", score: 82, issues: 6 },
+    { id: 8, fileName: "cba321fed987", status: "Qualifies", score: 93, issues: 2 },
+    { id: 9, fileName: "def456abc123", status: "Qualifies", score: 89, issues: 4 },
+    { id: 10, fileName: "fed987cba654", status: "Needs Review", score: 76, issues: 8 }
   ];
   
   const [isGenerating, setIsGenerating] = useState(false);
@@ -210,7 +210,7 @@ export const ReportGenerator = ({ selectedFiles }: ReportGeneratorProps) => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>File Name</TableHead>
+                  <TableHead>Farm</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Compliance Score</TableHead>
                   <TableHead>Issues Found</TableHead>
@@ -224,12 +224,12 @@ export const ReportGenerator = ({ selectedFiles }: ReportGeneratorProps) => {
                     <TableCell>
                       <Badge 
                         variant={
-                          row.status === "Compliant" ? "outline" : 
+                          row.status === "Qualifies" ? "outline" : 
                           row.status === "Needs Review" ? "secondary" : 
                           "destructive"
                         }
                         className={
-                          row.status === "Compliant" ? "bg-green-600 text-white border-green-600" : 
+                          row.status === "Qualifies" ? "bg-green-600 text-white border-green-600" : 
                           row.status === "Needs Review" ? "border-yellow-500 text-yellow-700 bg-yellow-50" : 
                           ""
                         }
