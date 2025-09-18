@@ -20,11 +20,11 @@ const Home = () => {
               </div>
             </div>
             <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Secure Data Anonymization Platform
+              Evidence-to-Claims Engine
             </h1>
             <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-              Upload, anonymize, and certify data with complete privacy protection. 
-              Streamline your compliance workflow while maintaining the highest security standards.
+              Upload and certify producer data with complete data privacy. 
+              Check agricultural data against certification requirements.
             </p>
             
             <div className="grid md:grid-cols-2 gap-8 max-w-2xl mx-auto">
