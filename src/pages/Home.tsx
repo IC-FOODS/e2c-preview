@@ -4,11 +4,7 @@ import { Shield, Upload, FileCheck, Users, Database, Lock } from "lucide-react";
 
 const Home = () => {
   const handleRoleSelect = (role: "provider" | "certifier") => {
-    if (role === "provider") {
-      window.location.href = "/provider";
-    } else {
-      window.location.href = "/certifier";
-    }
+    window.location.href = "/login";
   };
 
   return (
